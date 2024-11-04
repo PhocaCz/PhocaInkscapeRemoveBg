@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Remove Image Background (AI)</name>
+    <id>org.phoca.raster.remove_bg</id>
+    <category>Raster</category>
+    <effect>
+        <effects-menu>
+            <submenu name="Raster">
+            </submenu>
+        </effects-menu>
+    </effect>
+
+    <param name="tab" type="notebook">
+        <page name="export_tab" gui-text="Remove Background">
+
+            <param name="model" type="optiongroup" gui-text="Model" gui-description="Select model">
+                <option value="u2net">U2net</option>
+                <option value="isnet-general-use">Isnet (General Use)</option>
+                <option value="birefnet-general-lite">Birefnet (General Lite)</option>
+            </param>
+
+            <param name="post_process_mask" type="boolean" gui-text="Post Process Mask"
+                gui-description="Set if post process mask will be applied">true</param>
+
+            <param name="alpha_matting" type="boolean" gui-text="Alpha Matting"
+                gui-description="Set if alpha matting will be applied">true</param>
+
+            <param name="alpha_matting_foreground_threshold" type="int" min="0" max="255"
+                gui-text="Alpha Matting Foreground Treshold"
+                gui-description="Set Alpha matting foreground treshold">240</param>
+
+            <param name="alpha_matting_background_threshold" type="int" min="0" max="255"
+                gui-text="Alpha Matting Background Treshold"
+                gui-description="Set Alpha matting background treshold">10</param>
+
+            <param name="alpha_matting_erode_size" type="int" min="0" max="40"
+                gui-text="Alpha Matting Erode Size" gui-description="Set Alpha matting erode size">
+                40</param>
+
+            <param name="debug" type="boolean" gui-text="Enable Debug"
+                gui-description="Enable or disable debug information">false</param>
+                
+        </page>
+        <page name="info_tab" gui-text="Info">
+
+            <param name="usage" type="description" appearance="header">Usage:</param>
+            <param name="help" type="description" xml:space="preserve">- Make sure you have your remb library environment set up correctly on your computer, see Be aware section below
+- Select raster image, click on Raster - Remove Image Background. Set options and click on Apply button
+- Then the selected image should have its background removed using AI
+
+Be aware:
+- This extensions requires rembg and PIL library installed on your system, see: https://github.com/danielgatis/rembg
+- This extension is for experienced users who have set up and tested the rembg library on their computer
+- Removing image backgrounds using AI models can be a very challenging process. Therefore, it is a good idea to have your environment set up correctly and try first to remove the background of an image using the rembg library directly in the console
+
+See:
+
+- https://www.phoca.cz/blog/
+- https://inkscape.org
+- https://www.phoca.cz
+</param>
+
+        </page>
+    </param>
+    <script>
+        <command location="inx" interpreter="python">remove_bg.py</command>
+    </script>
+</inkscape-extension>
