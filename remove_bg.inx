@@ -26,12 +26,12 @@
                 gui-description="Set if alpha matting will be applied">true</param>
 
             <param name="alpha_matting_foreground_threshold" type="int" min="0" max="255"
-                gui-text="Alpha Matting Foreground Treshold"
-                gui-description="Set Alpha matting foreground treshold">240</param>
+                gui-text="Alpha Matting Foreground Threshold"
+                gui-description="Set Alpha matting foreground threshold">240</param>
 
             <param name="alpha_matting_background_threshold" type="int" min="0" max="255"
-                gui-text="Alpha Matting Background Treshold"
-                gui-description="Set Alpha matting background treshold">10</param>
+                gui-text="Alpha Matting Background Threshold"
+                gui-description="Set Alpha matting background threshold">10</param>
 
             <param name="alpha_matting_erode_size" type="int" min="0" max="40"
                 gui-text="Alpha Matting Erode Size" gui-description="Set Alpha matting erode size">
