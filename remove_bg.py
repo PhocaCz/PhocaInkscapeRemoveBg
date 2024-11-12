@@ -35,6 +35,8 @@ from rembg import new_session, remove
 from PIL import Image, ImageEnhance, ImageChops, ImageOps
 import subprocess
 
+import warnings
+
 class RemoveBackgroundLayer(inkex.Effect):
     def __init__(self):
         inkex.Effect.__init__(self)
@@ -78,17 +80,24 @@ class RemoveBackgroundLayer(inkex.Effect):
 
     def effect(self):
         opt                         = self.options
-        self.options.temp_file      = tempfile.gettempdir() + "/phocaRemoveBgInput.png"
-        self.options.source_file    = opt.input_file
-        self.options.dest_file      = tempfile.gettempdir() + "/phocaRemoveBgOutput.png"
-        self.options.dpi            = '300'
 
-        self.remove_bg()
+        with tempfile.TemporaryDirectory() as temp_dir:
+
+            # inkex.utils.debug(temp_dir)
+            self.options.temp_file      = temp_dir + "/phocaRemoveBgInput.png"
+            self.options.source_file    = opt.input_file
+            self.options.dest_file      = temp_dir + "/phocaRemoveBgOutput.png"
+            self.options.dpi            = '300'
+
+            self.remove_bg()
 
     def remove_bg(self):
 
         opt = self.options
         # inkex.utils.debug(opt.model)
+
+        if not opt.debug:
+            warnings.filterwarnings("ignore", category=ResourceWarning, message=".*TemporaryDirectory.*")
 
         # https://gitlab.com/inkscape/inkscape/-/issues/4163
         os.environ["SELF_CALL"] = "true"
